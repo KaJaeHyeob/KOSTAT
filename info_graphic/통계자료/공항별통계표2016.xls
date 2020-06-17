@@ -1,0 +1,262 @@
+
+
+
+
+
+
+
+				<table class="table table6 text-center b_b mb0">
+					<caption class="sr-only">공항별 통계 표에 대한 공항명, 운항, 여객, 화물의 정보가 있습니다.</caption>
+					<colgroup>
+						<col style="width:95px">
+						<col style="width:69px">
+						<col style="width:69px">
+						<col style="width:72px">
+						<col style="width:69px">
+						<col style="width:69px">
+						<col style="width:72px">
+						<col style="width:69px">
+						<col style="width:69px">
+						<col style="width:71px">
+					</colgroup>
+					<thead>
+						<tr>
+							<th scope="col" rowspan="2">공항명</th>
+							<th scope="colgroup" colspan="3">운항(편수)</th>
+							<th scope="colgroup" colspan="3">여객(명)</th>
+							<th scope="colgroup" colspan="3">화물(ton)</th>
+						</tr>
+						<tr>
+							<th scope="col">도착</th>
+							<th scope="col">출발</th>
+							<th scope="col">계</th>
+							<th scope="col" class="bd-left">도착</th>
+							<th scope="col">출발</th>
+							<th scope="col">계</th>
+							<th scope="col" class="bd-left">도착</th>
+							<th scope="col">출발</th>
+							<th scope="col">계</th>
+						</tr>
+					</thead>
+					<tbody>
+					<!-- airportStatsList -->
+
+
+					<tr>
+						<th scope="row">김포</th>
+						<td>72,968</td>
+						<td>73,298</td>
+						<td>146,266</td>
+						<td class="bd-left">12,545,594</td>
+						<td>12,497,494</td>
+						<td>25,043,088</td>
+						<td class="bd-left">137,042.8</td>
+						<td>137,662.7</td>
+						<td>274,705.5</td>
+					</tr>
+
+					<tr>
+						<th scope="row">김해</th>
+						<td>49,672</td>
+						<td>49,686</td>
+						<td>99,358</td>
+						<td class="bd-left">7,445,398</td>
+						<td>7,455,417</td>
+						<td>14,900,815</td>
+						<td class="bd-left">105,328.8</td>
+						<td>80,194.1</td>
+						<td>185,523</td>
+					</tr>
+
+					<tr>
+						<th scope="row">제주</th>
+						<td>86,316</td>
+						<td>86,427</td>
+						<td>172,743</td>
+						<td class="bd-left">14,846,593</td>
+						<td>14,860,771</td>
+						<td>29,707,364</td>
+						<td class="bd-left">133,099.6</td>
+						<td>158,394.2</td>
+						<td>291,493.8</td>
+					</tr>
+
+					<tr>
+						<th scope="row">대구</th>
+						<td>8,552</td>
+						<td>8,537</td>
+						<td>17,089</td>
+						<td class="bd-left">1,256,582</td>
+						<td>1,276,550</td>
+						<td>2,533,132</td>
+						<td class="bd-left">12,939.4</td>
+						<td>11,401.1</td>
+						<td>24,340.6</td>
+					</tr>
+
+					<tr>
+						<th scope="row">광주</th>
+						<td>5,398</td>
+						<td>5,394</td>
+						<td>10,792</td>
+						<td class="bd-left">807,921</td>
+						<td>805,854</td>
+						<td>1,613,775</td>
+						<td class="bd-left">6,263.7</td>
+						<td>8,554.4</td>
+						<td>14,818.1</td>
+					</tr>
+
+					<tr>
+						<th scope="row">무안</th>
+						<td>1,164</td>
+						<td>1,166</td>
+						<td>2,330</td>
+						<td class="bd-left">161,791</td>
+						<td>159,884</td>
+						<td>321,675</td>
+						<td class="bd-left">1,363.9</td>
+						<td>1,387.1</td>
+						<td>2,751</td>
+					</tr>
+
+					<tr>
+						<th scope="row">청주</th>
+						<td>8,731</td>
+						<td>8,687</td>
+						<td>17,418</td>
+						<td class="bd-left">1,367,564</td>
+						<td>1,365,191</td>
+						<td>2,732,755</td>
+						<td class="bd-left">10,843.9</td>
+						<td>11,419.5</td>
+						<td>22,263.4</td>
+					</tr>
+
+					<tr>
+						<th scope="row">양양</th>
+						<td>310</td>
+						<td>311</td>
+						<td>621</td>
+						<td class="bd-left">44,099</td>
+						<td>44,605</td>
+						<td>88,704</td>
+						<td class="bd-left">358.8</td>
+						<td>533.2</td>
+						<td>892</td>
+					</tr>
+
+					<tr>
+						<th scope="row">여수</th>
+						<td>2,407</td>
+						<td>2,406</td>
+						<td>4,813</td>
+						<td class="bd-left">249,350</td>
+						<td>254,021</td>
+						<td>503,371</td>
+						<td class="bd-left">1,038.2</td>
+						<td>1,152.1</td>
+						<td>2,190.3</td>
+					</tr>
+
+					<tr>
+						<th scope="row">울산</th>
+						<td>2,445</td>
+						<td>2,446</td>
+						<td>4,891</td>
+						<td class="bd-left">268,986</td>
+						<td>276,335</td>
+						<td>545,321</td>
+						<td class="bd-left">1,319.2</td>
+						<td>1,136</td>
+						<td>2,455.2</td>
+					</tr>
+
+					<tr>
+						<th scope="row">사천</th>
+						<td>911</td>
+						<td>911</td>
+						<td>1,822</td>
+						<td class="bd-left">76,523</td>
+						<td>74,205</td>
+						<td>150,728</td>
+						<td class="bd-left">385.8</td>
+						<td>313.7</td>
+						<td>699.5</td>
+					</tr>
+
+					<tr>
+						<th scope="row">포항</th>
+						<td>458</td>
+						<td>458</td>
+						<td>916</td>
+						<td class="bd-left">32,079</td>
+						<td>36,147</td>
+						<td>68,226</td>
+						<td class="bd-left">113.8</td>
+						<td>102.6</td>
+						<td>216.4</td>
+					</tr>
+
+					<tr>
+						<th scope="row">군산</th>
+						<td>714</td>
+						<td>713</td>
+						<td>1,427</td>
+						<td class="bd-left">115,671</td>
+						<td>116,461</td>
+						<td>232,132</td>
+						<td class="bd-left">700.6</td>
+						<td>619.8</td>
+						<td>1,320.4</td>
+					</tr>
+
+					<tr>
+						<th scope="row">원주</th>
+						<td>350</td>
+						<td>349</td>
+						<td>699</td>
+						<td class="bd-left">38,759</td>
+						<td>39,808</td>
+						<td>78,567</td>
+						<td class="bd-left">240.6</td>
+						<td>190.2</td>
+						<td>430.8</td>
+					</tr>
+
+						<tr>
+							<th scope="row">인천</th>
+							<td>170,033</td>
+							<td>169,640</td>
+							<td>339,673</td>
+							<td class="bd-left">28,929,388</td>
+							<td>28,836,009</td>
+							<td>57,765,397</td>
+							<td class="bd-left">1,717,418.3</td>
+							<td>1,825,225</td>
+							<td>3,542,643.3
+							</td>
+						</tr>
+
+						</tbody>
+
+					
+					<tfoot>
+						<tr>
+							<th scope="row" class="text-center">합 계</th>
+							<td>410,429</td>
+							<td>410,429</td>
+							<td>820,858</td>
+							<td class="bd-left">68,186,298</td>
+							<td>68,098,752</td>
+							<td>136,285,050</td>
+							<td class="bd-left">2,128,457.4</td>
+							<td>2,238,285.7</td>
+							<td>4,366,743.1
+							</td>
+						</tr>
+						</tfoot>
+
+				</table>
+	<!-- END -->
+			

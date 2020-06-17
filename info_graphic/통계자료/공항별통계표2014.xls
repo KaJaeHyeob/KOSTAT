@@ -1,0 +1,262 @@
+
+
+
+
+
+
+
+				<table class="table table6 text-center b_b mb0">
+					<caption class="sr-only">공항별 통계 표에 대한 공항명, 운항, 여객, 화물의 정보가 있습니다.</caption>
+					<colgroup>
+						<col style="width:95px">
+						<col style="width:69px">
+						<col style="width:69px">
+						<col style="width:72px">
+						<col style="width:69px">
+						<col style="width:69px">
+						<col style="width:72px">
+						<col style="width:69px">
+						<col style="width:69px">
+						<col style="width:71px">
+					</colgroup>
+					<thead>
+						<tr>
+							<th scope="col" rowspan="2">공항명</th>
+							<th scope="colgroup" colspan="3">운항(편수)</th>
+							<th scope="colgroup" colspan="3">여객(명)</th>
+							<th scope="colgroup" colspan="3">화물(ton)</th>
+						</tr>
+						<tr>
+							<th scope="col">도착</th>
+							<th scope="col">출발</th>
+							<th scope="col">계</th>
+							<th scope="col" class="bd-left">도착</th>
+							<th scope="col">출발</th>
+							<th scope="col">계</th>
+							<th scope="col" class="bd-left">도착</th>
+							<th scope="col">출발</th>
+							<th scope="col">계</th>
+						</tr>
+					</thead>
+					<tbody>
+					<!-- airportStatsList -->
+
+
+					<tr>
+						<th scope="row">김포</th>
+						<td>69,316</td>
+						<td>69,390</td>
+						<td>138,706</td>
+						<td class="bd-left">10,800,979</td>
+						<td>10,765,967</td>
+						<td>21,566,946</td>
+						<td class="bd-left">137,508.1</td>
+						<td>134,482.1</td>
+						<td>271,990.1</td>
+					</tr>
+
+					<tr>
+						<th scope="row">김해</th>
+						<td>39,315</td>
+						<td>39,331</td>
+						<td>78,646</td>
+						<td class="bd-left">5,205,016</td>
+						<td>5,173,850</td>
+						<td>10,378,866</td>
+						<td class="bd-left">62,654.3</td>
+						<td>60,599</td>
+						<td>123,253.3</td>
+					</tr>
+
+					<tr>
+						<th scope="row">제주</th>
+						<td>72,746</td>
+						<td>72,787</td>
+						<td>145,533</td>
+						<td class="bd-left">11,586,871</td>
+						<td>11,610,925</td>
+						<td>23,197,796</td>
+						<td class="bd-left">123,608.7</td>
+						<td>151,820.1</td>
+						<td>275,428.8</td>
+					</tr>
+
+					<tr>
+						<th scope="row">대구</th>
+						<td>5,919</td>
+						<td>5,913</td>
+						<td>11,832</td>
+						<td class="bd-left">760,490</td>
+						<td>776,838</td>
+						<td>1,537,328</td>
+						<td class="bd-left">9,502.1</td>
+						<td>9,305.6</td>
+						<td>18,807.7</td>
+					</tr>
+
+					<tr>
+						<th scope="row">광주</th>
+						<td>5,788</td>
+						<td>5,786</td>
+						<td>11,574</td>
+						<td class="bd-left">736,852</td>
+						<td>733,244</td>
+						<td>1,470,096</td>
+						<td class="bd-left">6,295.2</td>
+						<td>9,077.5</td>
+						<td>15,372.7</td>
+					</tr>
+
+					<tr>
+						<th scope="row">무안</th>
+						<td>751</td>
+						<td>748</td>
+						<td>1,499</td>
+						<td class="bd-left">90,966</td>
+						<td>87,448</td>
+						<td>178,414</td>
+						<td class="bd-left">822.1</td>
+						<td>915.5</td>
+						<td>1,737.6</td>
+					</tr>
+
+					<tr>
+						<th scope="row">청주</th>
+						<td>5,817</td>
+						<td>5,816</td>
+						<td>11,633</td>
+						<td class="bd-left">853,046</td>
+						<td>849,492</td>
+						<td>1,702,538</td>
+						<td class="bd-left">8,268</td>
+						<td>9,490.5</td>
+						<td>17,758.5</td>
+					</tr>
+
+					<tr>
+						<th scope="row">양양</th>
+						<td>728</td>
+						<td>726</td>
+						<td>1,454</td>
+						<td class="bd-left">117,870</td>
+						<td>119,668</td>
+						<td>237,538</td>
+						<td class="bd-left">969.3</td>
+						<td>1,415.4</td>
+						<td>2,384.7</td>
+					</tr>
+
+					<tr>
+						<th scope="row">여수</th>
+						<td>2,835</td>
+						<td>2,832</td>
+						<td>5,667</td>
+						<td class="bd-left">211,214</td>
+						<td>222,580</td>
+						<td>433,794</td>
+						<td class="bd-left">835.3</td>
+						<td>1,216.4</td>
+						<td>2,051.7</td>
+					</tr>
+
+					<tr>
+						<th scope="row">울산</th>
+						<td>2,432</td>
+						<td>2,432</td>
+						<td>4,864</td>
+						<td class="bd-left">227,396</td>
+						<td>229,664</td>
+						<td>457,060</td>
+						<td class="bd-left">1,379.7</td>
+						<td>1,140.3</td>
+						<td>2,520</td>
+					</tr>
+
+					<tr>
+						<th scope="row">사천</th>
+						<td>901</td>
+						<td>901</td>
+						<td>1,802</td>
+						<td class="bd-left">65,529</td>
+						<td>59,263</td>
+						<td>124,792</td>
+						<td class="bd-left">354.6</td>
+						<td>276.7</td>
+						<td>631.3</td>
+					</tr>
+
+					<tr>
+						<th scope="row">포항</th>
+						<td>770</td>
+						<td>770</td>
+						<td>1,540</td>
+						<td class="bd-left">56,101</td>
+						<td>56,286</td>
+						<td>112,387</td>
+						<td class="bd-left">228.2</td>
+						<td>212.4</td>
+						<td>440.6</td>
+					</tr>
+
+					<tr>
+						<th scope="row">군산</th>
+						<td>603</td>
+						<td>602</td>
+						<td>1,205</td>
+						<td class="bd-left">77,409</td>
+						<td>76,780</td>
+						<td>154,189</td>
+						<td class="bd-left">562.7</td>
+						<td>483.6</td>
+						<td>1,046.3</td>
+					</tr>
+
+					<tr>
+						<th scope="row">원주</th>
+						<td>345</td>
+						<td>344</td>
+						<td>689</td>
+						<td class="bd-left">37,797</td>
+						<td>38,353</td>
+						<td>76,150</td>
+						<td class="bd-left">260.1</td>
+						<td>187.3</td>
+						<td>447.4</td>
+					</tr>
+
+						<tr>
+							<th scope="row">인천</th>
+							<td>145,076</td>
+							<td>144,967</td>
+							<td>290,043</td>
+							<td class="bd-left">22,814,774</td>
+							<td>22,697,325</td>
+							<td>45,512,099</td>
+							<td class="bd-left">1,558,242.4</td>
+							<td>1,684,868.1</td>
+							<td>3,243,110.6
+							</td>
+						</tr>
+
+						</tbody>
+
+					
+					<tfoot>
+						<tr>
+							<th scope="row" class="text-center">합 계</th>
+							<td>353,342</td>
+							<td>353,345</td>
+							<td>706,687</td>
+							<td class="bd-left">53,642,310</td>
+							<td>53,497,683</td>
+							<td>107,139,993</td>
+							<td class="bd-left">1,911,490.9</td>
+							<td>2,065,490.3</td>
+							<td>3,976,981.2
+							</td>
+						</tr>
+						</tfoot>
+
+				</table>
+	<!-- END -->
+			
