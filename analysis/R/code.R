@@ -1,0 +1,518 @@
+## 주제 : 시도별 범죄율 차이를 발생시키는 요인 분석 (2010년과 2017년의 비교를 중심으로)
+## 분석 방법 : 주성분 분석 (PCA ; Principal Component Analysis)
+
+
+# delete all objs
+rm(list=ls())
+
+
+# set working directory
+getwd()
+setwd("~/Downloads/kostat_intern/analysis/refine_data")
+
+
+# 데이터 불러오기
+# install.packages("xlsx")
+library(xlsx)
+AdmArea = read.xlsx("AdmArea.xlsx", sheetIndex=1)
+Aging = read.xlsx("Aging.xlsx", sheetIndex=1)
+Arrest = read.xlsx("Arrest.xlsx", sheetIndex=1)
+Car_num = read.xlsx("Car_num.xlsx", sheetIndex=1)
+CrimePerThousand = read.xlsx("CrimePerThousand.xlsx", sheetIndex = 1)
+EcoAct = read.xlsx("EcoAct.xlsx", sheetIndex = 1)
+EcoDev = read.xlsx("EcoDev.xlsx", sheetIndex=1)
+FM = read.xlsx("FM.xlsx", sheetIndex=1)
+ForeignerPerThousand = read.xlsx("ForeignerPerThousand.xlsx", sheetIndex=1)
+Grdp = read.xlsx("GRDP.xlsx", sheetIndex=1)
+Houseprice = read.xlsx("Houseprice.xlsx", sheetIndex = 1)
+HyDrink = read.xlsx("HyDrink.xlsx", sheetIndex = 1)
+Hystress = read.xlsx("Hystress.xlsx", sheetIndex=1)
+Moving_rate = read.xlsx("Moving_rate.xlsx", sheetIndex = 1)
+Park = read.xlsx("Park.xlsx", sheetIndex=1)
+PolicePop = read.xlsx("PolicePop.xlsx", sheetIndex = 1)
+PopDensity = read.xlsx("PopDensity.xlsx", sheetIndex=1)
+PopGrowth = read.xlsx("PopGrowth.xlsx", sheetIndex=1)
+Unemply_rate = read.xlsx("Unemply_rate.xlsx", sheetIndex=1)
+OldmanWelfare = read.xlsx("OldmanWelfare.xlsx", sheetIndex=1)
+Suicide = read.xlsx("Suicide.xlsx", sheetIndex=1)
+Fat = read.xlsx("Fat.xlsx", sheetIndex=1)
+Smoke = read.xlsx("Smoke.xlsx", sheetIndex=1)
+
+
+# 데이터 정리 (2010~2017, 세종시 제외, NA 제거, 타입 맞추기)
+str(AdmArea)
+AdmArea = AdmArea[-c(1,18,19), -c(10:59)]
+
+str(Aging)
+Aging = Aging[-c(1,9),]
+Aging$X2010 = as.numeric(Aging$X2010)
+Aging$X2011 = as.numeric(Aging$X2011)
+
+str(Arrest)
+Arrest = Arrest[-1,]
+
+str(Car_num)
+Car_num = Car_num[-c(1,9,19,20), -c(10:58)]
+Car_num$X2010 = as.numeric(Car_num$X2010)
+Car_num$X2011 = as.numeric(Car_num$X2011)
+
+str(CrimePerThousand)
+CrimePerThousand = CrimePerThousand[-c(1,9),]
+
+str(EcoAct)
+EcoAct = EcoAct[-c(1,9,19,20), -c(10:35)]
+EcoAct$X2010 = as.numeric(EcoAct$X2010)
+EcoAct$X2011 = as.numeric(EcoAct$X2011)
+EcoAct$X2012 = as.numeric(EcoAct$X2012)
+EcoAct$X2013 = as.numeric(EcoAct$X2013)
+EcoAct$X2014 = as.numeric(EcoAct$X2014)
+EcoAct$X2015 = as.numeric(EcoAct$X2015)
+EcoAct$X2016 = as.numeric(EcoAct$X2016)
+
+str(EcoDev)
+EcoDev = EcoDev[-c(1,18,19,20), -c(10:35)]
+
+str(FM)
+FM = FM[-c(1,9,19,20),]
+FM$X2010 = as.numeric(FM$X2010)
+FM$X2011 = as.numeric(FM$X2011)
+
+str(ForeignerPerThousand)
+ForeignerPerThousand = ForeignerPerThousand[-c(1,9),]
+ForeignerPerThousand$X2010 = as.numeric(ForeignerPerThousand$X2010)
+ForeignerPerThousand$X2011 = as.numeric(ForeignerPerThousand$X2011)
+
+str(Grdp)
+Grdp = Grdp[-c(1,9,19,20), -c(10:35)]
+
+str(Houseprice)
+Houseprice = Houseprice[-c(1,9,19,20), -c(10:58)]
+Houseprice$X2010 = as.numeric(Houseprice$X2010)
+Houseprice$X2011 = as.numeric(Houseprice$X2011)
+Houseprice$X2012 = as.numeric(Houseprice$X2012)
+
+str(HyDrink)
+HyDrink = HyDrink[-c(1,9,19,20), -c(10:35)]
+HyDrink$X2010 = as.numeric(HyDrink$X2010)
+HyDrink$X2011 = as.numeric(HyDrink$X2011)
+
+str(Hystress)
+Hystress = Hystress[-c(1,9,19,20), -c(10:35)] 
+Hystress$X2010 = as.numeric(Hystress$X2010)
+Hystress$X2011 = as.numeric(Hystress$X2011)
+
+str(Moving_rate)
+Moving_rate = Moving_rate[-c(1,9),]
+
+str(Park)
+Park = Park[-c(1,9,19,20), -c(10:58)]
+Park$X2010 = as.numeric(Park$X2010)
+Park$X2011 = as.numeric(Park$X2011)
+
+str(PolicePop)
+PolicePop = PolicePop[-c(1,9),]
+PolicePop$X2010 = as.numeric(PolicePop$X2010)
+PolicePop$X2011 = as.numeric(PolicePop$X2011)
+PolicePop$X2012 = as.numeric(PolicePop$X2012)
+PolicePop$X2013 = as.numeric(PolicePop$X2013)
+PolicePop$X2014 = as.numeric(PolicePop$X2014)
+PolicePop$X2015 = as.numeric(PolicePop$X2015)
+PolicePop$X2016 = as.numeric(PolicePop$X2016)
+PolicePop$X2017 = as.numeric(PolicePop$X2017)
+
+str(PopDensity)
+PopDensity = PopDensity[-c(1,9),]
+
+str(PopGrowth)
+PopGrowth = PopGrowth[-c(1,9,19), -10]
+PopGrowth$X2010 = as.numeric(PopGrowth$X2010)
+PopGrowth$X2011 = as.numeric(PopGrowth$X2011)
+PopGrowth$X2012 = as.numeric(PopGrowth$X2012)
+
+str(Unemply_rate)
+Unemply_rate = Unemply_rate[-c(1,18,19,20), -c(10:58)] 
+
+str(OldmanWelfare)
+OldmanWelfare = OldmanWelfare[-c(1,18,19,20), -c(10:58)]
+
+str(Suicide)
+Suicide = Suicide[-c(1,18,19,20), -c(10:58)]
+
+str(Fat)
+Fat = Fat[-c(1,18,19,20), -c(10:58)]
+Fat$X2010 = as.numeric(Fat$X2010)
+Fat$X2011 = as.numeric(Fat$X2011)
+Fat$X2012 = as.numeric(Fat$X2012)
+Fat$X2013 = as.numeric(Fat$X2013)
+Fat$X2014 = as.numeric(Fat$X2014)
+Fat$X2015 = as.numeric(Fat$X2015)
+Fat$X2016 = as.numeric(Fat$X2016)
+Fat$X2017 = as.numeric(Fat$X2017)
+
+str(Smoke)
+Smoke = Smoke[-c(1,18,19,20),-c(10:58)]
+Smoke$X2010 = as.numeric(Smoke$X2010)
+Smoke$X2011 = as.numeric(Smoke$X2011)
+Smoke$X2012 = as.numeric(Smoke$X2012)
+Smoke$X2013 = as.numeric(Smoke$X2013)
+Smoke$X2014 = as.numeric(Smoke$X2014)
+Smoke$X2015 = as.numeric(Smoke$X2015)
+Smoke$X2016 = as.numeric(Smoke$X2016)
+Smoke$X2017 = as.numeric(Smoke$X2017)
+
+
+# 년도별로 데이터 병합
+data_2010 = data.frame(Region=factor(c("Seoul","Busan","Daegu","Incheon",
+                                       "Gwangju","Daejeon", "Ulsan","Gyeonggi",
+                                       "Gangwon","Chungbuk","Chungnam","Jenbuk",
+                                       "Jennam","Gyengbuk","Gyengnam", "Jeju")))
+rownames(data_2010) = c("Seoul","Busan","Daegu","Incheon",
+                        "Gwangju","Daejeon", "Ulsan","Gyeonggi",
+                        "Gangwon","Chungbuk","Chungnam","Jenbuk",
+                        "Jennam","Gyengbuk","Gyengnam", "Jeju")
+data_2010$AdmArea = AdmArea$X2010
+data_2010$Aging = Aging$X2010
+data_2010$Arrest = Arrest$X2010
+data_2010$Car_num = Car_num$X2010
+data_2010$CrimePerThousand = CrimePerThousand$X2010
+data_2010$EcoAct = EcoAct$X2010
+data_2010$EcoDev = EcoDev$X2010
+data_2010$FM = FM$X2010
+data_2010$ForeignerPerThousand = ForeignerPerThousand$X2010
+data_2010$Grdp = Grdp$X2010
+data_2010$Houseprice <- Houseprice$X2010
+data_2010$HyDrink = HyDrink$X2010
+data_2010$Hystress = Hystress$X2010
+data_2010$Moving_rate = Moving_rate$X2010
+data_2010$Park = Park$X2010
+data_2010$PolicePop = PolicePop$X2010
+data_2010$PopDensity = PopDensity$X2010
+data_2010$PopGrowth = PopGrowth$X2010
+data_2010$Unemply_rate = Unemply_rate$X2010
+data_2010$OldmanWelfare = OldmanWelfare$X2010
+data_2010$Suicide = Suicide$X2010
+data_2010$Fat = Fat$X2010
+data_2010$Smoke = Smoke$X2010
+str(data_2010)
+
+data_2011 = data.frame(Region=factor(c("Seoul","Busan","Daegu","Incheon",
+                                       "Gwangju","Daejeon", "Ulsan","Gyeonggi",
+                                       "Gangwon","Chungbuk","Chungnam","Jenbuk",
+                                       "Jennam","Gyengbuk","Gyengnam", "Jeju")))
+rownames(data_2011) = c("Seoul","Busan","Daegu","Incheon",
+                        "Gwangju","Daejeon", "Ulsan","Gyeonggi",
+                        "Gangwon","Chungbuk","Chungnam","Jenbuk",
+                        "Jennam","Gyengbuk","Gyengnam", "Jeju")
+data_2011$AdmArea = AdmArea$X2011
+data_2011$Aging = Aging$X2011
+data_2011$Arrest = Arrest$X2011
+data_2011$Car_num = Car_num$X2011
+data_2011$CrimePerThousand = CrimePerThousand$X2011
+data_2011$EcoAct = EcoAct$X2011
+data_2011$EcoDev = EcoDev$X2011
+data_2011$FM = FM$X2011
+data_2011$ForeignerPerThousand = ForeignerPerThousand$X2011
+data_2011$Grdp = Grdp$X2011
+data_2011$Houseprice <- Houseprice$X2011
+data_2011$HyDrink = HyDrink$X2011
+data_2011$Hystress = Hystress$X2011
+data_2011$Moving_rate = Moving_rate$X2011
+data_2011$Park = Park$X2011
+data_2011$PolicePop = PolicePop$X2011
+data_2011$PopDensity = PopDensity$X2011
+data_2011$PopGrowth = PopGrowth$X2011
+data_2011$Unemply_rate = Unemply_rate$X2011
+data_2011$OldmanWelfare = OldmanWelfare$X2011
+data_2011$Suicide = Suicide$X2011
+data_2011$Fat = Fat$X2011
+data_2011$Smoke = Smoke$X2011
+str(data_2011)
+
+data_2012 = data.frame(Region=factor(c("Seoul","Busan","Daegu","Incheon",
+                                       "Gwangju","Daejeon", "Ulsan","Gyeonggi",
+                                       "Gangwon","Chungbuk","Chungnam","Jenbuk",
+                                       "Jennam","Gyengbuk","Gyengnam", "Jeju")))
+rownames(data_2012) = c("Seoul","Busan","Daegu","Incheon",
+                        "Gwangju","Daejeon", "Ulsan","Gyeonggi",
+                        "Gangwon","Chungbuk","Chungnam","Jenbuk",
+                        "Jennam","Gyengbuk","Gyengnam", "Jeju")
+data_2012$AdmArea = AdmArea$X2012
+data_2012$Aging = Aging$X2012
+data_2012$Arrest = Arrest$X2012
+data_2012$Car_num = Car_num$X2012
+data_2012$CrimePerThousand = CrimePerThousand$X2012
+data_2012$EcoAct = EcoAct$X2012
+data_2012$EcoDev = EcoDev$X2012
+data_2012$FM = FM$X2012
+data_2012$ForeignerPerThousand = ForeignerPerThousand$X2012
+data_2012$Grdp = Grdp$X2012
+data_2012$Houseprice <- Houseprice$X2012
+data_2012$HyDrink = HyDrink$X2012
+data_2012$Hystress = Hystress$X2012
+data_2012$Moving_rate = Moving_rate$X2012
+data_2012$Park = Park$X2012
+data_2012$PolicePop = PolicePop$X2012
+data_2012$PopDensity = PopDensity$X2012
+data_2012$PopGrowth = PopGrowth$X2012
+data_2012$Unemply_rate = Unemply_rate$X2012
+data_2012$OldmanWelfare = OldmanWelfare$X2012
+data_2012$Suicide = Suicide$X2012
+data_2012$Fat = Fat$X2012
+data_2012$Smoke = Smoke$X2012
+str(data_2012)
+
+data_2013 = data.frame(Region=factor(c("Seoul","Busan","Daegu","Incheon",
+                                       "Gwangju","Daejeon", "Ulsan","Gyeonggi",
+                                       "Gangwon","Chungbuk","Chungnam","Jenbuk",
+                                       "Jennam","Gyengbuk","Gyengnam", "Jeju")))
+rownames(data_2013) = c("Seoul","Busan","Daegu","Incheon",
+                        "Gwangju","Daejeon", "Ulsan","Gyeonggi",
+                        "Gangwon","Chungbuk","Chungnam","Jenbuk",
+                        "Jennam","Gyengbuk","Gyengnam", "Jeju")
+data_2013$AdmArea = AdmArea$X2013
+data_2013$Aging = Aging$X2013
+data_2013$Arrest = Arrest$X2013
+data_2013$Car_num = Car_num$X2013
+data_2013$CrimePerThousand = CrimePerThousand$X2013
+data_2013$EcoAct = EcoAct$X2013
+data_2013$EcoDev = EcoDev$X2013
+data_2013$FM = FM$X2013
+data_2013$ForeignerPerThousand = ForeignerPerThousand$X2013
+data_2013$Grdp = Grdp$X2013
+data_2013$Houseprice <- Houseprice$X2013
+data_2013$HyDrink = HyDrink$X2013
+data_2013$Hystress = Hystress$X2013
+data_2013$Moving_rate = Moving_rate$X2013
+data_2013$Park = Park$X2013
+data_2013$PolicePop = PolicePop$X2013
+data_2013$PopDensity = PopDensity$X2013
+data_2013$PopGrowth = PopGrowth$X2013
+data_2013$Unemply_rate = Unemply_rate$X2013
+data_2013$OldmanWelfare = OldmanWelfare$X2013
+data_2013$Suicide = Suicide$X2013
+data_2013$Fat = Fat$X2013
+data_2013$Smoke = Smoke$X2013
+str(data_2013)
+
+data_2014 = data.frame(Region=factor(c("Seoul","Busan","Daegu","Incheon",
+                                       "Gwangju","Daejeon", "Ulsan","Gyeonggi",
+                                       "Gangwon","Chungbuk","Chungnam","Jenbuk",
+                                       "Jennam","Gyengbuk","Gyengnam", "Jeju")))
+rownames(data_2014) = c("Seoul","Busan","Daegu","Incheon",
+                        "Gwangju","Daejeon", "Ulsan","Gyeonggi",
+                        "Gangwon","Chungbuk","Chungnam","Jenbuk",
+                        "Jennam","Gyengbuk","Gyengnam", "Jeju")
+data_2014$AdmArea = AdmArea$X2014
+data_2014$Aging = Aging$X2014
+data_2014$Arrest = Arrest$X2014
+data_2014$Car_num = Car_num$X2014
+data_2014$CrimePerThousand = CrimePerThousand$X2014
+data_2014$EcoAct = EcoAct$X2014
+data_2014$EcoDev = EcoDev$X2014
+data_2014$FM = FM$X2014
+data_2014$ForeignerPerThousand = ForeignerPerThousand$X2014
+data_2014$Grdp = Grdp$X2014
+data_2014$Houseprice <- Houseprice$X2014
+data_2014$HyDrink = HyDrink$X2014
+data_2014$Hystress = Hystress$X2014
+data_2014$Moving_rate = Moving_rate$X2014
+data_2014$Park = Park$X2014
+data_2014$PolicePop = PolicePop$X2014
+data_2014$PopDensity = PopDensity$X2014
+data_2014$PopGrowth = PopGrowth$X2014
+data_2014$Unemply_rate = Unemply_rate$X2014
+data_2014$OldmanWelfare = OldmanWelfare$X2014
+data_2014$Suicide = Suicide$X2014
+data_2014$Fat = Fat$X2014
+data_2014$Smoke = Smoke$X2014
+str(data_2014)
+
+data_2015 = data.frame(Region=factor(c("Seoul","Busan","Daegu","Incheon",
+                                       "Gwangju","Daejeon", "Ulsan","Gyeonggi",
+                                       "Gangwon","Chungbuk","Chungnam","Jenbuk",
+                                       "Jennam","Gyengbuk","Gyengnam", "Jeju")))
+rownames(data_2015) = c("Seoul","Busan","Daegu","Incheon",
+                        "Gwangju","Daejeon", "Ulsan","Gyeonggi",
+                        "Gangwon","Chungbuk","Chungnam","Jenbuk",
+                        "Jennam","Gyengbuk","Gyengnam", "Jeju")
+data_2015$AdmArea = AdmArea$X2015
+data_2015$Aging = Aging$X2015
+data_2015$Arrest = Arrest$X2015
+data_2015$Car_num = Car_num$X2015
+data_2015$CrimePerThousand = CrimePerThousand$X2015
+data_2015$EcoAct = EcoAct$X2015
+data_2015$EcoDev = EcoDev$X2015
+data_2015$FM = FM$X2015
+data_2015$ForeignerPerThousand = ForeignerPerThousand$X2015
+data_2015$Grdp = Grdp$X2015
+data_2015$Houseprice <- Houseprice$X2015
+data_2015$HyDrink = HyDrink$X2015
+data_2015$Hystress = Hystress$X2015
+data_2015$Moving_rate = Moving_rate$X2015
+data_2015$Park = Park$X2015
+data_2015$PolicePop = PolicePop$X2015
+data_2015$PopDensity = PopDensity$X2015
+data_2015$PopGrowth = PopGrowth$X2015
+data_2015$Unemply_rate = Unemply_rate$X2015
+data_2015$OldmanWelfare = OldmanWelfare$X2015
+data_2015$Suicide = Suicide$X2015
+data_2015$Fat = Fat$X2015
+data_2015$Smoke = Smoke$X2015
+str(data_2015)
+
+data_2016 = data.frame(Region=factor(c("Seoul","Busan","Daegu","Incheon",
+                                       "Gwangju","Daejeon", "Ulsan","Gyeonggi",
+                                       "Gangwon","Chungbuk","Chungnam","Jenbuk",
+                                       "Jennam","Gyengbuk","Gyengnam", "Jeju")))
+rownames(data_2016) = c("Seoul","Busan","Daegu","Incheon",
+                        "Gwangju","Daejeon", "Ulsan","Gyeonggi",
+                        "Gangwon","Chungbuk","Chungnam","Jenbuk",
+                        "Jennam","Gyengbuk","Gyengnam", "Jeju")
+data_2016$AdmArea = AdmArea$X2016
+data_2016$Aging = Aging$X2016
+data_2016$Arrest = Arrest$X2016
+data_2016$Car_num = Car_num$X2016
+data_2016$CrimePerThousand = CrimePerThousand$X2016
+data_2016$EcoAct = EcoAct$X2016
+data_2016$EcoDev = EcoDev$X2016
+data_2016$FM = FM$X2016
+data_2016$ForeignerPerThousand = ForeignerPerThousand$X2016
+data_2016$Grdp = Grdp$X2016
+data_2016$Houseprice <- Houseprice$X2016
+data_2016$HyDrink = HyDrink$X2016
+data_2016$Hystress = Hystress$X2016
+data_2016$Moving_rate = Moving_rate$X2016
+data_2016$Park = Park$X2016
+data_2016$PolicePop = PolicePop$X2016
+data_2016$PopDensity = PopDensity$X2016
+data_2016$PopGrowth = PopGrowth$X2016
+data_2016$Unemply_rate = Unemply_rate$X2016
+data_2016$OldmanWelfare = OldmanWelfare$X2016
+data_2016$Suicide = Suicide$X2016
+data_2016$Fat = Fat$X2016
+data_2016$Smoke = Smoke$X2016
+str(data_2016)
+
+data_2017 = data.frame(Region=factor(c("Seoul","Busan","Daegu","Incheon",
+                                 "Gwangju","Daejeon", "Ulsan","Gyeonggi",
+                                 "Gangwon","Chungbuk","Chungnam","Jenbuk",
+                                 "Jennam","Gyengbuk","Gyengnam", "Jeju")))
+rownames(data_2017) = c("Seoul","Busan","Daegu","Incheon",
+                        "Gwangju","Daejeon", "Ulsan","Gyeonggi",
+                        "Gangwon","Chungbuk","Chungnam","Jenbuk",
+                        "Jennam","Gyengbuk","Gyengnam", "Jeju")
+data_2017$AdmArea = AdmArea$X2017
+data_2017$Aging = Aging$X2017
+data_2017$Arrest = Arrest$X2017
+data_2017$Car_num = Car_num$X2017
+data_2017$CrimePerThousand = CrimePerThousand$X2017
+data_2017$EcoAct = EcoAct$X2017
+data_2017$EcoDev = EcoDev$X2017
+data_2017$FM = FM$X2017
+data_2017$ForeignerPerThousand = ForeignerPerThousand$X2017
+data_2017$Grdp = Grdp$X2017
+data_2017$Houseprice <- Houseprice$X2017
+data_2017$HyDrink = HyDrink$X2017
+data_2017$Hystress = Hystress$X2017
+data_2017$Moving_rate = Moving_rate$X2017
+data_2017$Park = Park$X2017
+data_2017$PolicePop = PolicePop$X2017
+data_2017$PopDensity = PopDensity$X2017
+data_2017$PopGrowth = PopGrowth$X2017
+data_2017$Unemply_rate = Unemply_rate$X2017
+data_2017$OldmanWelfare = OldmanWelfare$X2017
+data_2017$Suicide = Suicide$X2017
+data_2017$Fat = Fat$X2017
+data_2017$Smoke = Smoke$X2017
+str(data_2017)
+
+
+# 분산분석을 통해 주제 성립 유무 판별
+# 귀무가설 : 시도별 범죄율이 같다
+# 대립가설 : 시도별 범죄율이 다르다
+data_all = rbind(data_2010,data_2011,data_2012,data_2013,
+                 data_2014,data_2015,data_2016,data_2017)
+View(data_all)
+colSums(is.na(data_all))
+data_all = na.omit(data_all)
+aov_all = aov(CrimePerThousand~Region, data=data_all)
+summary(aov_all)
+# Df Sum Sq Mean Sq F value Pr(>F)    
+# Region       15 2542.5  169.50   25.93 <2e-16 ***
+#   Residuals   112  732.1    6.54                   
+# ---
+#   Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+
+# 다중공선성 제거
+# 변수 사이의 상관계수 살피기
+X = data_all[,-1]
+cor_all = cor(X)
+cor_all
+# install.packages("PerformanceAnalytics")
+library(PerformanceAnalytics)
+chart.Correlation(X, histogram=T, col="grey10", pch=1)
+# 보기 쉽게 히트맵 작성하기
+# install.packages("GGally")
+library(GGally)
+ggcorr(X, name="corr", label=T)
+# VIF 지수 살피기
+# install.packages("fmsb")
+library(fmsb)
+vif_func = function(in_frame, thresh=10, trace=F, ...){
+  require(fmsb)
+  if(class(in_frame) != 'data.frame'){
+    in_frame = data.frame(in_frame)
+  }
+  vif_init = vector('list', length=ncol(in_frame))
+  names(vif_init) = names(in_frame)
+  var_names = names(in_frame)
+  for(val in var_names){
+    regressors = var_names[-which(var_names==val)]
+    form = paste(regressors, collapse='+')
+    form_in = formula(paste(val,' ~ .'))
+    vif_init[[val]] = VIF(lm(form_in,data=in_frame,...))
+  }
+  vif_max = max(unlist(vif_init))
+  if(vif_max < thresh){
+    if(trace == T){
+      prmatrix(vif_init, collab=c('var','vif'), rowlab=rep('',times=nrow(vif_init)), quote=F)
+      cat('\n')
+      cat(paste('All variables have VIF < ',thresh,', max VIF ',round(vif_max,2),sep=''), '\n\n')
+    }
+    return(names(in_frame))
+  }
+  else{
+    in_dat = in_frame
+    while(vif_max >= thresh){
+      vif_vals = vector('list', length=ncol(in_dat))
+      names(vif_vals) = names(in_dat)
+      var_names = names(in_dat)
+      for(val in var_names){
+        regressors = var_names[-which(var_names == val)]
+        form = paste(regressors, collapse = '+')
+        form_in = formula(paste(val,' ~ .'))
+        vif_add = VIF(lm(form_in,data=in_dat,...))
+        vif_vals[[val]] = vif_add
+      }
+      max_row = which.max(vif_vals)
+      vif_max = vif_vals[max_row]
+      if(vif_max<thresh){
+        break
+      }
+      if(trace == T){
+        vif_vals = do.call('rbind', vif_vals)
+        vif_vals
+        prmatrix(vif_vals,collab='vif',rowlab=row.names(vif_vals),quote=F)
+        cat('\n')
+        cat('removed: ',names(vif_max),unlist(vif_max),'\n\n')
+        flush.console()
+      }
+      in_dat = in_dat[,!names(in_dat) %in% names(vif_max)]
+    }
+    return(names(in_dat))
+  }
+}
+X_vif = vif_func(X,thresh=10,trace=T)
+X_vif
+

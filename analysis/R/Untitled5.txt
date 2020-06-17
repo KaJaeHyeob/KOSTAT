@@ -1,0 +1,94 @@
+## sub2 ##
+# select top3 and bottom3화 -> 최신과 가장예전 pca
+data_all2
+
+#2017년의 top3 / bottom3
+data_7[c(order(data_7$CrimePerThousand)),] # bottom3
+                        # Jenbuk , Chungnam, Jennam
+                       # top3
+                       # Jeju, Gangwon, Busan
+
+#2010년의 top3 / bottom3
+data_0[c(order(data_0$CrimePerThousand)),] # bottom3
+                       # Gyeonggi, Incheon, Daejeon
+                       # top3
+                       # Jeju, Gwangju,Gyengnam
+
+# 년도별로 정규화.
+str(data_0)
+scaled_data_0 <- as.data.frame(scale(data_0[1:23]))
+scaled_data_7 <- as.data.frame(scale(data_7[1:23]))
+View(scaled_data_7)
+
+#VIF 10이상인 변수 제거.
+scaled_data_0 <- scaled_data_0[,-c(8,17,20)]
+scaled_data_7 <- scaled_data_7[,-c(8,17,20)]
+colnames(scaled_data_7)
+
+#2010년 하위3, 상위3 pca
+summary(scaled_data_0)
+scaled_data_0 <- scaled_data_0[c(4,5,6,8,15,16),-5]
+str(scaled_data_0)
+scaled_data_0_pca <- prcomp(scaled_data_0,scale.=T)
+scaled_data_0_pca
+summary(scaled_data_0_pca)  #PC3 또는 PC4까지 선택.
+scaled_data_0_pca$rotation[,1:4] # 이 값의 절댓값 수치로 PC들의 특징 파악가능.
+scaled_data_0_pca$x[,1:4] # 지역별로 주성분 변수의 값을 알 수 있음.
+biplot(scaled_data_0_pca)
+
+#2010년 하위3,상위3의 2017 pca
+View(scaled_data_7)
+scaled_data_7 <- as.data.frame(scale(data_7[1:23]))
+scaled_data_7 <- scaled_data_7[,-c(8,17,20)]
+change.data.7 <- scaled_data_7[c(4,5,6,8,15,16),-5]
+change.data.7
+change.data.7.pca <- prcomp(change.data.7,scale.=T)
+change.data.7.pca
+summary(change.data.7.pca)
+change.data.7.pca$rotation[,1:4]
+change.data.7.pca$x[,1:4]
+biplot(change.data.7.pca)
+
+#2017년 하위3, 상위3 pca
+View(data_7)
+scaled_data_7 <- as.data.frame(scale(data_7[1:23]))
+scaled_data_7 <- scaled_data_7[,-c(8,17,20)]
+summary(scaled_data_7)
+View(scaled_data_7)
+scaled_data_7 <- scaled_data_7[c(2,9,11,12,13,16),-5]
+str(scaled_data_7)
+scaled_data_7_pca <- prcomp(scaled_data_7,scale.=T)
+scaled_data_7_pca
+summary(scaled_data_7_pca) # PC3 or PC4 선택.
+scaled_data_7_pca$rotation[,1:4] # 이 값의 절댓값 수치로 PC들의 특징 파악가능.
+scaled_data_7_pca$x[,1:4] # 지역별로 주성분 변수의 값을 알 수 있음.
+biplot(scaled_data_7_pca)
+
+
+## sub3 ##
+scaled.data.0 <- as.data.frame(scale(data_0[1:23]))
+scaled.data.0 <- scaled.data.0[,-c(8,17,20)]
+scaled.data.7 <- as.data.frame(scale(data_7[1:23]))
+scaled.data.7 <- scaled.data.7[,-c(8,17,20)]
+
+#2010년의 pca
+data.0 <- scaled.data.0[,-5]
+data.0.pca <- prcomp(data.0,scale.=T)
+data.0.pca
+summary(data.0.pca)
+data.0.pca$rotation[,1:6]
+data.0.pca$x[,1:6]
+biplot(data.0.pca)
+
+#2017년의 pca
+data.7 <- scaled.data.7[,-5]
+colnames(data.7)
+data.7.pca <- prcomp(data.7,scale.=T)
+data.7.pca
+summary(data.7.pca)
+data.7.pca$rotation[,1:6]
+data.7.pca$x[,1:6]
+biplot(data.7.pca)
+
+View(data_7)
+View(data_0)

@@ -1,0 +1,32 @@
+#2010 top bottom
+sort(abs(scaled_data_0_pca$rotation[,1]),decreasing =T)
+sort(abs(scaled_data_0_pca$rotation[,2]),decreasing =T)
+sort(abs(scaled_data_0_pca$rotation[,3]),decreasing =T)
+sort(abs(scaled_data_0_pca$rotation[,4]),decreasing =T)
+
+#2017 top bottom
+sort(abs(scaled_data_7_pca$rotation[,1]),decreasing = T)
+sort(abs(scaled_data_7_pca$rotation[,2]),decreasing = T)
+sort(abs(scaled_data_7_pca$rotation[,3]),decreasing = T)
+sort(abs(scaled_data_7_pca$rotation[,4]),decreasing = T)
+
+
+#2010 all
+sort(abs(data.0.pca$rotation[,1]),decreasing =T)
+sort(abs(data.0.pca$rotation[,2]),decreasing =T)
+sort(abs(data.0.pca$rotation[,3]),decreasing =T)
+sort(abs(data.0.pca$rotation[,4]),decreasing =T)
+sort(abs(data.0.pca$rotation[,5]),decreasing =T)
+sort(abs(data.0.pca$rotation[,6]),decreasing =T)
+
+
+#2017 all
+sort(abs(data.7.pca$rotation[,1]),decreasing =T)
+sort(abs(data.7.pca$rotation[,2]),decreasing =T)
+sort(abs(data.7.pca$rotation[,3]),decreasing =T)
+sort(abs(data.7.pca$rotation[,4]),decreasing =T)
+sort(abs(data.7.pca$rotation[,5]),decreasing =T)
+sort(abs(data.7.pca$rotation[,6]),decreasing =T)
+
+
+rm(list=ls())
